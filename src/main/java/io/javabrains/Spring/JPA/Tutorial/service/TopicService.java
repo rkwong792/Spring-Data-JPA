@@ -16,12 +16,6 @@ public class TopicService {
     @Autowired
     private TopicRepository topicRepository;
 
-    private List<Topic> topics = new ArrayList<>(Arrays.asList(
-       new Topic("spring", "Spring Framework","Spring Framework Description"),
-            new Topic("java", "Core Java","Core Java Description"),
-            new Topic("javascript", "JavaScript","JavaScript Description")
-            ));
-
     public List<Topic> getAllTopics(){
         List<Topic> topics = new ArrayList<>();
         topicRepository.findAll() //Iterable of ALL the topics in the database
@@ -29,8 +23,8 @@ public class TopicService {
         return topics;
     }
 
-    public Optional<Topic> getTopic(String id) {
-        return topicRepository.findById(id);
+    public Topic getTopic(String id) {
+        return topicRepository.findById(id).orElse(null);
     }
 
     public void addTopic(Topic topic){
